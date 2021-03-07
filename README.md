@@ -221,7 +221,7 @@ public class TestFilter implements Filter {
 ~~~
 
 #### HomeController에서 로그 사용
-~~~
+~~~java
 @Controller
 public class HomeController {
 
