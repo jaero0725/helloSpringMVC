@@ -2,7 +2,7 @@
 Spring의 다양한 기능을 활용한 예제  
 * * * 
 
-### Spring MVC 기능
+### 1. Spring MVC 기능
 #### pom.xml 추가
 ~~~
 		<!-- Spring MVC -->
@@ -12,10 +12,10 @@ Spring의 다양한 기능을 활용한 예제
 			<version>${org.springframework-version}</version>
 		</dependency>
 ~~~
-### Spring WebForm 기능
+### 2. Spring WebForm 기능
 > DataBinding, DataBuffering, DataValidation기능
 
-### Spring Security 5 기능
+### 3. Spring Security 5 기능
 #### pom.xml 추가
 ~~~
 		<!-- Spring Security 5 / core, web, config -->
@@ -127,7 +127,7 @@ public class TestFilter implements Filter {
 </beans:beans>   
 ~~~
 
-### Spring SLF4J, Logback 사용
+### 4. Spring SLF4J, Logback 사용
 > 기존의 스프링에서 자동으로 만들어주는 log4j를 활용하지 않고, Logback을 사용하여 로그 기능을 활용한다.   
 > 단순히 ip주소와, 홈페이지 url에 대해서만 찍어주도록 하였다.
 #### pom.xml 수정
