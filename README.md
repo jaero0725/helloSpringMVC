@@ -10,7 +10,7 @@
 >
 > 2. Spring Authentication, Authorization 
 >> 메모리상, db상에서 회원에 대해서 인증하도록 설정
-'''xml
+<pre>
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/security"
 	xmlns:beans="http://www.springframework.org/schema/beans"
@@ -57,7 +57,7 @@
 		<logout/>
     </http>
 </beans:beans>
-'''
+</pre>
 
 ### Spring SLF4J, Logback 사용
 
