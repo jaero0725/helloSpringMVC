@@ -91,3 +91,29 @@ public class TestFilter implements Filter {
 
 ### Spring SLF4J, Logback 사용
 > 기존의 스프링에서 자동으로 만들어주는 log4j를 활용하지 않고, Logback을 사용하여 로그 기능을 활용한다.
+> pom.xml 수정
+~~~
+		<!-- Logging -->
+			<!-- SLF4j -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${org.slf4j-version}</version>
+			</dependency>
+			<!-- 브리시 역할 -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>${org.slf4j-version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			
+			<!-- log4j를  logback으로 변경 -->
+			<!-- logback-classic만 넣어주면, core도 들어감 -->
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>1.2.3</version>
+				<scope>runtime</scope>
+			</dependency>   
+~~~
