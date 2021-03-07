@@ -1,5 +1,5 @@
 # helloSpringMVC
-Spring의 다양한 기능을 활용한 예제  
+Spring의 다양한 기능을 활용한 간단한 글을 올리는 사이트 
 * * * 
 
 ### 1. Spring MVC 기능
