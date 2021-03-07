@@ -60,6 +60,7 @@ public class OfferController {
 		return "offercreated";
 	}
 }  
+~~~
 
 >createoffer.jsp
 ~~~
@@ -110,6 +111,7 @@ public class OfferController {
 </body>
 </html>
 ~~~
+
 #### Data Validation 기능 
 > Offer.java 
 > 입력 데이터에 대한 검증을 해준다. 
