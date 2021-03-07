@@ -11,12 +11,35 @@ Spring의 다양한 기능을 활용한 예제
 ### Spring Security 5 기능
 > 1. filter 기능 
 >> TestFilter  : url이 바뀔때 console에 찍어준다. // 추후 log를 사용해서 사용
->
+'''java
+//Servlet 앞단에서 처리해줌.
+@WebFilter("/*")
+public class TestFilter implements Filter {
+
+    public TestFilter() {
+    	
+    }
+	public void destroy() {
+		
+	}
+	
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		
+		//방문 url 찍는 기능 
+		System.out.println(((HttpServletRequest) request).getRequestURL());
+	
+		// pass the request along the filter chain
+		chain.doFilter(request, response);
+	}
+	public void init(FilterConfig fConfig) throws ServletException {
+	}
+}
+'''
 > 2. Spring Authentication, Authorization 
 >> 메모리상, db상에서 회원에 대해서 인증하도록 설정
 >> 
-<pre>
-<code>
+#### security-context.xml
+'''
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/security"
 	xmlns:beans="http://www.springframework.org/schema/beans"
@@ -63,8 +86,7 @@ Spring의 다양한 기능을 활용한 예제
 		<logout/>
     </http>
 </beans:beans>
-</code>
-</pre>
+'''
 
 ### Spring SLF4J, Logback 사용
-
+> 기존의 스프링에서 자동으로 만들어주는 log4j를 활용하지 않고, Logback을 사용하여 로그 기능을 활용한다.
