@@ -40,7 +40,7 @@ public class TestFilter implements Filter {
 >> 메모리상, db상에서 회원에 대해서 인증하도록 설정
 >> 
 #### security-context.xml      
-<pre><code>
+~~~
 <?xml version="1.0" encoding="UTF-8"?>
 <beans:beans xmlns="http://www.springframework.org/schema/security"
 	xmlns:beans="http://www.springframework.org/schema/beans"
@@ -87,7 +87,7 @@ public class TestFilter implements Filter {
 		<logout/>
     </http>
 </beans:beans>   
-</code></pre>
+~~~
 
 ### Spring SLF4J, Logback 사용
 > 기존의 스프링에서 자동으로 만들어주는 log4j를 활용하지 않고, Logback을 사용하여 로그 기능을 활용한다.
