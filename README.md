@@ -14,7 +14,123 @@ Spring의 다양한 기능을 활용한 예제
 ~~~
 ### 2. Spring WebForm 기능
 > DataBinding, DataBuffering, DataValidation기능
+#### Data Binding 기능 
+> request parameter 값을 form bean에 바인딩 해준다. 
+#### Data Buffering 기능 
+> Data binding-aware tags를 사용하여 기존에 입력했던 값들이 지워지지 않게 한다. 
 
+~~~java
+@Controller
+public class OfferController {
+
+	@Autowired
+	private OfferService offerService;
+	
+	@RequestMapping("/offers")
+	public String showOffer(Model model) {
+		List<Offer> offers = offerService.getCurrent();
+		model.addAttribute("offers",offers);
+		return "offers";
+	}
+	
+	@RequestMapping("/createoffer")
+	public String createOffer(Model model) {
+		//Data Buffering 을 위해 빈 model 인  Offer()를 만든다.
+		model.addAttribute("offer",new Offer());
+		return "createoffer";
+	}
+	
+	@RequestMapping("/docreate")
+	public String doCreate(Model model, @Valid Offer offer, BindingResult result) {
+		
+		if(result.hasErrors()) {
+			System.out.println("== Form data does not validated ==");
+			List<ObjectError> errors = result.getAllErrors();
+			for(ObjectError error:errors) {
+				System.out.println(error.getDefaultMessage());
+			}
+			return "createoffer"; //다시 돌려줌
+		}
+		
+		//Form에서 넘어온 데이터를 Data Binding 시켜야 한다.
+		//Controller  -> Service -> DAO
+		offerService.insert(offer);
+		
+		System.out.println(offer);
+		return "offercreated";
+	}
+}
+~~~jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/resources/css/main.css">
+	
+</head>
+<body>
+		<sf:form method="post" action="${pageContext.request.contextPath }/docreate" 
+		modelAttribute ="offer">
+			<table class="formtable">
+				<tr>
+					<td class="label">Name :</td> 
+					<td> 
+						<sf:input class="control" type="text" path="name"/><br/>
+						<sf:errors path="name" class="error"/>
+					</td>
+				</tr>
+				<tr>
+					<td class="label">Email :</td> 
+					<td>
+						 <sf:input class="control" type="text" path="email"/><br/>
+						 <sf:errors path="email" class="error"/>
+					 </td>
+				</tr>
+				<tr>
+					<td class="label">Offer :</td>
+					<td>
+						<sf:textarea class="control" path="text" rows="10" cols="10"></sf:textarea><br/>
+						<sf:errors path="text" class="error"/>
+					</td>
+				</tr>
+				<tr>
+					<td class="label"></td>
+					<td><input type="submit" value="새 제안"></td>
+				</tr>
+			</table>
+		</sf:form>
+</body>
+</html>
+~~~
+#### Data Validation 기능 
+> Offer.java 
+> 입력 데이터에 대한 검증을 해준다. 
+~~~java
+@Getter
+@Setter
+@NoArgsConstructor 
+@ToString
+public class Offer {
+	private int id;
+	@Size(min=2, max=100, message="Name must be between 2 and 100 chars")
+	private String name;
+	
+	@Email(message="Pelase provide a valid email address")
+	@NotEmpty(message="The email address cannot be empty")
+	private String email;
+	
+	@Size(min=2, max=100, message="Name must be between 2 and 100 chars")
+	private String text;
+}
+
+
+~~~
 ### 3. Spring Security 5 기능
 #### pom.xml 추가
 ~~~
